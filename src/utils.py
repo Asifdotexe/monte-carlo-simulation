@@ -10,11 +10,18 @@ def rollDice() -> bool:
     """
     roll = random.randint(1, 100)
     if 51 <= roll <= 99:
-        return True
+        return True, roll
     else:
-        return False
+        return False, roll
     
-def multiple_betters(funds: int, initial_wager: int, wager_count: int, number_of_betters: int, betting_function: Callable[[int, int, int, bool], None]) -> None:
+def multiple_betters(
+        funds: int, 
+        initial_wager: int, 
+        wager_count: int,
+        number_of_betters: int, 
+        betting_function: Callable[[int, int, int, bool], None], 
+        logscale: bool | None = None
+    ) -> None:
     """
     Simulates multiple bettors playing a given betting strategy and plots their account values.
 
@@ -26,4 +33,4 @@ def multiple_betters(funds: int, initial_wager: int, wager_count: int, number_of
     """
     for i in range(number_of_betters):
         add_legend = (i == 0)
-        betting_function(funds, initial_wager, wager_count, add_legend)
+        betting_function(funds, initial_wager, wager_count, add_legend, logscale)
